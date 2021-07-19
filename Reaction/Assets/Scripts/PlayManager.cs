@@ -15,6 +15,7 @@ public class PlayManager : MonoBehaviour
     {
         result.text = "";
         stop = true;
+        Debug.Log("hello");
     }
 
     // Update is called once per frame
@@ -24,6 +25,8 @@ public class PlayManager : MonoBehaviour
     }
     public void OnButtonClick(string str)
     {
+
+        Debug.Log("button click");
         if (stop == false)
         {
             stop = true;
@@ -39,6 +42,8 @@ public class PlayManager : MonoBehaviour
     }
     public void OnStartClick()
     {
+
+        Debug.Log("start click");
         if (stop == true)
         {
             stop = false;
@@ -47,6 +52,8 @@ public class PlayManager : MonoBehaviour
 
             // 기능 추가
             int number = Random.Range(0, 4);
+
+
             if (number == 0)
             {
                 question.text = "A";
