@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public Text txtScore;
+    public Text Result;
     int curScore = 0;
 
     // Start is called before the first frame update
@@ -29,6 +30,13 @@ public class PlayerCtrl : MonoBehaviour
             Destroy(other.gameObject);
             curScore+=1;
             txtScore.text = curScore.ToString();
+        }
+    }
+    private void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.tag =="Enemy"){
+            Destroy(gameObject);
+            Result.text = "Game Over";
+            # Result.enable - true;
         }
     }
 }
