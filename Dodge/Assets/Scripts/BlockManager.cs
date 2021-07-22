@@ -18,4 +18,7 @@ public class BlockManager : MonoBehaviour
         pos.z = Random.Range(-5f, 5f);
         obj.transform.position = pos;
     }
+    public void PlayerDestroy(){ // 다른 클래스에서 호출
+        CancelInvoke("BlockCreate"); // invoke 멈춘다
+    }
 }
