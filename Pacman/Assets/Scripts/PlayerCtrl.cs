@@ -30,13 +30,17 @@ public class PlayerCtrl : MonoBehaviour
             Destroy(other.gameObject);
             curScore+=1;
             txtScore.text = curScore.ToString();
+
+            if(curScore==8){
+                Result.text = "Clear";
+                Time.timeScale = 0.1f; // 시간이 흐르는 속도 - 시간이 본래 시간의 1/10로 흐름 시간이 느리게 흐른다
+            }
         }
     }
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag =="Enemy"){
             Destroy(gameObject);
             Result.text = "Game Over";
-            # Result.enable - true;
         }
     }
 }
