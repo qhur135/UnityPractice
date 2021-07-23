@@ -10,6 +10,8 @@ public class MoleHunting : MonoBehaviour
     public Text txtBtn1;
     public Text txtBtn2;
     public Text txtBtn3;
+    public Text txtRemainTime;
+    float remainTime = 10f;
 
     int curScore = 0;
     string answer;
@@ -20,6 +22,18 @@ public class MoleHunting : MonoBehaviour
     void Start()
     {
         InvokeRepeating("ButtonRefresh",1f,1f);
+    }
+    void Update(){
+        remainTime -= Time.deltaTime;
+        
+        if(remainTime>0f){
+            txtRemainTime.text = remainTime.ToString("f2");
+        }
+        else{
+            txtRemainTime.text = "0.00";
+            inputEnable = false;
+            CancelInvoke("ButtonRefresh");
+        }   
     }
     void ButtonRefresh(){
 
@@ -49,7 +63,7 @@ public class MoleHunting : MonoBehaviour
         if(inputEnable == false)
             return;
 
-        inputEnable = false;
+        // inputEnable = false;
 
         CancelInvoke("ButtonRefresh");
         InvokeRepeating("ButtonRefresh",0f,1f);
