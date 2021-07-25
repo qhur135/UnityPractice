@@ -21,7 +21,7 @@ public class MoleHunting : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        InvokeRepeating("ButtonRefresh",1f,1f);
+        StartCoroutine("ButtonRefresh");
     }
     void Update(){
         remainTime -= Time.deltaTime;
@@ -32,30 +32,33 @@ public class MoleHunting : MonoBehaviour
         else{
             txtRemainTime.text = "0.00";
             inputEnable = false;
-            CancelInvoke("ButtonRefresh");
+            // CancelInvoke("ButtonRefresh");
+            StopCoroutine("ButtonRefresh");
         }   
     }
-    void ButtonRefresh(){
+    IEnumerator ButtonRefresh(){
 
-        inputEnable = true;
+        while(true){
+            inputEnable = true;
 
-        txtBtn1.text="-";
-        txtBtn2.text="-";
-        txtBtn3.text="-";
-        int number = Random.Range(0,3);
-        if(number==0){
-            txtBtn1.text="0";
-            answer="1";
+            txtBtn1.text="-";
+            txtBtn2.text="-";
+            txtBtn3.text="-";
+            int number = Random.Range(0,3);
+            if(number==0){
+                txtBtn1.text="0";
+                answer="1";
+            }
+            if(number==1){
+                txtBtn2.text="0";
+                answer="2";
+            }
+            if(number==2){
+                txtBtn3.text="0";
+                answer="3";
+            }
+            yield return new WaitForSeconds(Random.Range(0.5f,1.5f)); //1초 대기
         }
-        if(number==1){
-            txtBtn2.text="0";
-            answer="2";
-        }
-        if(number==2){
-            txtBtn3.text="0";
-            answer="3";
-        }
-
     }
 
     public void OnButton(string str){
@@ -65,8 +68,10 @@ public class MoleHunting : MonoBehaviour
 
         // inputEnable = false;
 
-        CancelInvoke("ButtonRefresh");
-        InvokeRepeating("ButtonRefresh",0f,1f);
+        // CancelInvoke("ButtonRefresh");
+        // InvokeRepeating("ButtonRefresh",0f,1f);
+        StopCoroutine("ButtonRefresh");
+        StartCoroutine("ButtonRefresh");
 
         if(answer ==str)
             curScore+=100;

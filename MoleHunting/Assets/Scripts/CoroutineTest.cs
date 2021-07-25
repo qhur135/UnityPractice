@@ -22,7 +22,7 @@ public class CoroutineTest : MonoBehaviour
         while(true){ // 무한루프
             Debug.Log("Test");
 
-            yield return null; 
+            yield return null; // 한프레임만큼 대기 
         }
     }
 }
